@@ -1,10 +1,17 @@
-
 import { HypixelPlayer } from '@/types/hypixel';
 
 // Function to fetch player UUID from Mojang API
 export const fetchPlayerUUID = async (username: string): Promise<string> => {
   try {
-    const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${username}`);
+    // Using a CORS proxy to avoid CORS issues
+    const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+    const mojangApiUrl = `https://api.mojang.com/users/profiles/minecraft/${username}`;
+    
+    const response = await fetch(`${corsProxy}${mojangApiUrl}`, {
+      headers: {
+        'Origin': window.location.origin
+      }
+    });
     
     if (!response.ok) {
       throw new Error('Player not found');
