@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -24,6 +25,15 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				hypixel: {
+					blue: '#00AAFF',
+					purple: '#AA00FF',
+					gold: '#FFAA00',
+				},
+				glass: {
+					background: 'rgba(255, 255, 255, 0.1)',
+					border: 'rgba(255, 255, 255, 0.2)',
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -84,11 +94,24 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'tab-fade': {
+					'0%': { opacity: '0', transform: 'translateY(5px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'pulse-glow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.6' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'tab-fade': 'tab-fade 0.3s ease-out',
+				'pulse-glow': 'pulse-glow 2s infinite'
+			},
+			backgroundImage: {
+				'hypixel-gradient': 'linear-gradient(135deg, #AA00FF 0%, #00AAFF 100%)',
 			}
 		}
 	},

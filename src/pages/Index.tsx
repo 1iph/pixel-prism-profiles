@@ -1,11 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { usePlayerSearch } from '@/contexts/PlayerSearchContext';
+import PlayerSearch from '@/components/PlayerSearch';
+import PlayerProfile from '@/components/PlayerProfile';
+import GameModeTabs from '@/components/GameModeTabs';
+import Footer from '@/components/Footer';
 
 const Index = () => {
+  const { playerData } = usePlayerSearch();
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen w-full pb-12 px-4">
+      <div className="max-w-5xl mx-auto pt-12">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl sm:text-5xl font-bold bg-hypixel-gradient bg-clip-text text-transparent animate-pulse-glow">
+            Hypixel Stats
+          </h1>
+          <p className="mt-2 text-muted-foreground">
+            View detailed Hypixel player statistics
+          </p>
+        </div>
+        
+        <PlayerSearch />
+        
+        {playerData && (
+          <>
+            <PlayerProfile />
+            <GameModeTabs />
+          </>
+        )}
+        
+        <Footer />
       </div>
     </div>
   );
