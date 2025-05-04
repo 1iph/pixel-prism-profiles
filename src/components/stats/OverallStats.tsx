@@ -16,9 +16,7 @@ const OverallStats = () => {
   // Count achievements
   let totalAchievements = 0;
   if (playerData.achievementRewards) {
-    Object.keys(playerData.achievementRewards).forEach(() => {
-      totalAchievements++;
-    });
+    totalAchievements = Object.keys(playerData.achievementRewards).length;
   }
   
   // Find favorite game mode based on stats
@@ -26,24 +24,24 @@ const OverallStats = () => {
   let highestValue = 0;
   
   if (playerData.stats) {
-    if (playerData.stats.Bedwars && playerData.stats.Bedwars.games_played_bedwars > highestValue) {
+    if (playerData.stats.Bedwars && (playerData.stats.Bedwars.games_played_bedwars || 0) > highestValue) {
       favoriteGame = 'Bedwars';
-      highestValue = playerData.stats.Bedwars.games_played_bedwars;
+      highestValue = playerData.stats.Bedwars.games_played_bedwars || 0;
     }
     
-    if (playerData.stats.SkyWars && playerData.stats.SkyWars.games_played > highestValue) {
+    if (playerData.stats.SkyWars && (playerData.stats.SkyWars.games_played || 0) > highestValue) {
       favoriteGame = 'SkyWars';
-      highestValue = playerData.stats.SkyWars.games_played;
+      highestValue = playerData.stats.SkyWars.games_played || 0;
     }
     
-    if (playerData.stats.Duels && playerData.stats.Duels.games_played_duels > highestValue) {
+    if (playerData.stats.Duels && (playerData.stats.Duels.games_played_duels || 0) > highestValue) {
       favoriteGame = 'Duels';
-      highestValue = playerData.stats.Duels.games_played_duels;
+      highestValue = playerData.stats.Duels.games_played_duels || 0;
     }
     
-    if (playerData.stats.MurderMystery && playerData.stats.MurderMystery.games > highestValue) {
+    if (playerData.stats.MurderMystery && (playerData.stats.MurderMystery.games || 0) > highestValue) {
       favoriteGame = 'Murder Mystery';
-      highestValue = playerData.stats.MurderMystery.games;
+      highestValue = playerData.stats.MurderMystery.games || 0;
     }
   }
   

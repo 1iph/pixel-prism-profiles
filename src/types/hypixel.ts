@@ -15,6 +15,10 @@ export interface HypixelPlayer {
   networkExp?: number;
   karma?: number;
   achievementPoints?: number;
+  achievementRewards?: Record<string, any>; // Added this property
+  socialMedia?: { // Added this property
+    links?: Record<string, string>;
+  };
   stats?: {
     Bedwars?: BedwarsStats;
     SkyWars?: SkywarsStats;
@@ -46,6 +50,10 @@ export interface SkywarsStats {
   kills?: number;
   deaths?: number;
   levelFormatted?: string;
+  games_played?: number; // Added this property
+  kills_solo?: number; // Added this property
+  kills_team?: number; // Added this property
+  arrows_hit?: number; // Added this property
 }
 
 export interface DuelsStats {
@@ -56,6 +64,11 @@ export interface DuelsStats {
   deaths?: number;
   current_winstreak?: number;
   best_winstreak?: number;
+  games_played_duels?: number; // Added this property
+  melee_hits?: number; // Added this property
+  melee_swings?: number; // Added this property
+  bow_hits?: number; // Added this property
+  blocks_placed?: number; // Added this property
 }
 
 export interface MurderMysteryStats {
@@ -66,10 +79,11 @@ export interface MurderMysteryStats {
   deaths?: number;
   detective_wins?: number;
   murderer_wins?: number;
-}
-
-export interface SkyBlockStats {
-  profiles?: Record<string, SkyBlockProfile>;
+  coins_picked_up?: number; // Added this property
+  murderer_kills?: number; // Added this property (though it may be a typo for murderer_wins)
+  knife_kills?: number; // Added this property
+  bow_kills?: number; // Added this property
+  kills_as_murderer?: number; // Added this property
 }
 
 export interface SkyBlockProfile {
@@ -79,6 +93,10 @@ export interface SkyBlockProfile {
     balance?: number;
   };
   members?: Record<string, any>;
+}
+
+export interface SkyBlockStats {
+  profiles?: Record<string, SkyBlockProfile>;
 }
 
 // Player search context
