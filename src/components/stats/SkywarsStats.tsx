@@ -1,6 +1,6 @@
 
 import { usePlayerSearch } from '@/contexts/PlayerSearchContext';
-import { formatNumber, calculateKDRatio, calculateWLRatio } from '@/utils/hypixelApi';
+import { formatNumber, calculateKDRatio, calculateWLRatio, parseSkywarsLevel } from '@/utils/hypixelApi';
 
 const SkywarsStats = () => {
   const { playerData } = usePlayerSearch();
@@ -27,12 +27,15 @@ const SkywarsStats = () => {
   const kdr = calculateKDRatio(kills, deaths);
   const wlr = calculateWLRatio(wins, losses);
   
+  // Parse Skywars level
+  const level = parseSkywarsLevel(sw.levelFormatted);
+  
   return (
     <div className="animate-tab-fade space-y-6">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="stat-card">
           <div className="stat-label">Level</div>
-          <div className="stat-value">{sw.levelFormatted || '1'}</div>
+          <div className="stat-value">{level}</div>
         </div>
         
         <div className="stat-card">

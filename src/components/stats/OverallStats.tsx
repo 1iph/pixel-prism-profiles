@@ -1,6 +1,6 @@
 
 import { usePlayerSearch } from '@/contexts/PlayerSearchContext';
-import { formatNumber } from '@/utils/hypixelApi';
+import { formatNumber, formatDate } from '@/utils/hypixelApi';
 
 const OverallStats = () => {
   const { playerData } = usePlayerSearch();
@@ -10,13 +10,16 @@ const OverallStats = () => {
   // Get general stats
   const karma = playerData.karma || 0;
   const achievementPoints = playerData.achievementPoints || 0;
-  const firstLogin = playerData.firstLogin ? new Date(playerData.firstLogin).toLocaleDateString() : 'Unknown';
-  const lastLogin = playerData.lastLogin ? new Date(playerData.lastLogin).toLocaleDateString() : 'Unknown';
+  const firstLogin = formatDate(playerData.firstLogin);
+  const lastLogin = formatDate(playerData.lastLogin);
   
   // Count achievements
   let totalAchievements = 0;
   if (playerData.achievementRewards) {
     totalAchievements = Object.keys(playerData.achievementRewards).length;
+  } else if (playerData.achievementsOneTime) {
+    // Fallback to achievementsOneTime if achievementRewards is not available
+    totalAchievements = playerData.achievementsOneTime.length;
   }
   
   // Find favorite game mode based on stats

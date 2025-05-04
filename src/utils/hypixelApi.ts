@@ -1,9 +1,21 @@
+
 import { HypixelPlayer } from '@/types/hypixel';
 
 // Function to fetch player UUID from Mojang API
 export const fetchPlayerUUID = async (username: string): Promise<string> => {
   try {
-    // Using a CORS proxy to avoid CORS issues
+    // First try a direct call to the API
+    try {
+      const response = await fetch(`https://api.mojang.com/users/profiles/minecraft/${username}`);
+      if (response.ok) {
+        const data = await response.json();
+        return data.id;
+      }
+    } catch (error) {
+      console.log("Direct API call failed, trying with CORS proxy...");
+    }
+    
+    // If direct call fails, use CORS proxy as fallback
     const corsProxy = 'https://cors-anywhere.herokuapp.com/';
     const mojangApiUrl = `https://api.mojang.com/users/profiles/minecraft/${username}`;
     
@@ -97,3 +109,32 @@ export const getPlayerRank = (player: HypixelPlayer): { name: string; color: str
   
   return { name: 'Default', color: 'text-gray-300' };
 };
+
+// Format date from timestamp
+export const formatDate = (timestamp: number | undefined): string => {
+  if (!timestamp) return 'Unknown';
+  
+  // Hypixel timestamps are in milliseconds
+  const date = new Date(timestamp);
+  
+  // Format: Month Day, Year
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+};
+
+// Parse Skywars level from formatted string
+export const parseSkywarsLevel = (levelFormatted: string | undefined): string => {
+  if (!levelFormatted) return '1';
+  
+  // Extract the number and star character from the formatted string
+  const match = levelFormatted.match(/(\d+)⋆/);
+  if (match && match[1]) {
+    return match[1] + '⋆';
+  }
+  
+  return levelFormatted.replace(/§[0-9a-fk-or]/g, '').trim();
+};
+

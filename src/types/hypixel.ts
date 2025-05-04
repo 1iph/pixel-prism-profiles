@@ -15,8 +15,9 @@ export interface HypixelPlayer {
   networkExp?: number;
   karma?: number;
   achievementPoints?: number;
-  achievementRewards?: Record<string, any>; // Added this property
-  socialMedia?: { // Added this property
+  achievementRewards?: Record<string, any>;
+  achievementsOneTime?: string[]; // Added this property
+  socialMedia?: {
     links?: Record<string, string>;
   };
   stats?: {
